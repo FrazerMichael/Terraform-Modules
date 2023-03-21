@@ -6,22 +6,16 @@ resource "aws_vpc" "vpc" {
   tags                             = { Name = "${var.cluster}-vpc" }
 }
 resource "aws_internet_gateway" "igw" {
-  name = "${var.cluster}-igw"
-
   vpc_id = aws_vpc.vpc.id
   tags   = { Name = "${var.cluster}-igw" }
 }
 
 resource "aws_route_table" "public-RT" {
-  name = "${var.cluster}-public-RT"
-
   vpc_id = aws_vpc.vpc.id
   tags   = { Name = "${var.cluster}-public-RT"}
 }
 
 resource "aws_route_table" "private-RT" {
-  name = "${var.cluster}-private-RT"
-
   vpc_id = aws_vpc.vpc.id
   tags   = { Name = "${var.cluster}-private-RT" }
 }
@@ -33,8 +27,6 @@ resource "aws_route" "igw-route" {
 }
 
 resource "aws_subnet" "public-SN" {
-  name = "${var.cluster}-public-SN"
-
   vpc_id            = aws_vpc.vpc.id
   availability_zone = var.azs[0]
   cidr_block        = var.public-cidr
@@ -42,8 +34,6 @@ resource "aws_subnet" "public-SN" {
 }
 
 resource "aws_subnet" "private-SN" {
-  name = "${var.cluster}-private-SN"
-
   vpc_id            = aws_vpc.vpc.id
   availability_zone = var.azs[1]
   cidr_block        = var.private-cidr
