@@ -1,6 +1,4 @@
 resource "aws_vpc" "vpc" {
-  name = "${var.cluster}-vpc"
-
   cidr_block                       = var.cidr-block
   enable_dns_support               = true
   enable_dns_hostnames             = true
