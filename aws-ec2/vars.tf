@@ -16,7 +16,7 @@ variable "chassis" {
 }
 
 variable "private" {
-  type    = boolean
+  type    = bool
   default = false
 }
 
