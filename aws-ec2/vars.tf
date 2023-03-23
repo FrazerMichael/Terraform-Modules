@@ -20,6 +20,6 @@ variable "private" {
   default = false
 }
 
-variable "name" {
+variable "config-name" {
   type = string
 }
