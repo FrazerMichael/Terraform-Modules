@@ -7,7 +7,7 @@ data "aws_ami" "amazon_linux" {
 	}
 }
 
-resource "aws_instance" "ec2-public" {
+resource "aws_instance" "ec2-instance" {
 	ami = data.aws_ami.amazon_linux.id
 	instance_type = var.chassis
 	key_name = "S144Key"
