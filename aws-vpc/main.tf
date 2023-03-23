@@ -12,7 +12,7 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_route_table" "public-RT" {
   vpc_id = aws_vpc.vpc.id
-  tags   = { Name = "${var.cluster}-public-RT"}
+  tags   = { Name = "${var.cluster}-public-RT" }
 }
 
 resource "aws_route_table" "private-RT" {
@@ -30,7 +30,7 @@ resource "aws_subnet" "public-SN" {
   vpc_id            = aws_vpc.vpc.id
   availability_zone = var.azs[0]
   cidr_block        = var.public-cidr
-  tags              = { Name = "${var.cluster}-public-SN"}
+  tags              = { Name = "${var.cluster}-public-SN" }
 }
 
 resource "aws_subnet" "private-SN" {

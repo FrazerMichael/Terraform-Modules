@@ -4,7 +4,7 @@ variable "cidr-block" {
 }
 
 variable "cluster" {
-  type    = string
+  type = string
 }
 
 variable "public-cidr" {

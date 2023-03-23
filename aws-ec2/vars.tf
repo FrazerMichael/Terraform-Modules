@@ -3,14 +3,23 @@ variable "sg-id" {}
 variable "SN-id" {}
 
 variable "cluster" {
-  type    = string
+  type = string
 }
 
 variable "key" {
-  type  = string
+  type = string
 }
 
 variable "chassis" {
-  type = string
+  type    = string
   default = "t2.micro"
+}
+
+variable "private" {
+  type    = boolean
+  default = false
+}
+
+variable "name" {
+  type = string
 }
