@@ -13,5 +13,5 @@ resource "aws_instance" "ec2-instance" {
   key_name        = "S144Key"
   subnet_id       = var.SN-id
   security_groups = [var.sg-id]
-  tags            = { Name = "${var.cluster}-ec2-${var.private == true ? "private" : "public"}-${var.name}" }
+  tags            = { Name = "${var.cluster}-ec2-${var.private == true ? "private" : "public"}-${var.config-name}" }
 }
