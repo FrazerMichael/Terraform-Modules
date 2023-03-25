@@ -10,7 +10,7 @@ data "aws_ami" "amazon_linux" {
 resource "aws_instance" "ec2-instance" {
   ami             = data.aws_ami.amazon_linux.id
   instance_type   = var.chassis
-  key_name        = "S144Key"
+  key_name        = var.key
   subnet_id       = var.SN-id
   security_groups = [var.sg-id]
   tags            = { Name = "${var.cluster}-ec2-${var.private == true ? "private" : "public"}-${var.config-name}" }
