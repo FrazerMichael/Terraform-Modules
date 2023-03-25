@@ -26,6 +26,7 @@ resource "aws_route" "igw-route" {
   gateway_id             = aws_internet_gateway.igw.id
 }
 
+
 resource "aws_subnet" "public-SN" {
   vpc_id            = aws_vpc.vpc.id
   availability_zone = var.azs[0]
@@ -39,3 +40,23 @@ resource "aws_subnet" "private-SN" {
   cidr_block        = var.private-cidr
   tags              = { Name = "${var.cluster}-private-SN" }
 }
+
+resource "aws_eip" "eip-public-SN" {
+  vpc = true
+}
+
+resource "aws_nat_gateway" "nat-gw" {
+  allocation_id = aws_eip.example.id
+  subnet_id     = aws_subnet.public-SN.id
+  tags = {Name = "${var.cluster}-NAT-gw"}
+  depends_on = [aws_internet_gateway.igw]
+}
+
+
+resource "aws_route" "nat-route" {
+  depends_on = [aws_nat_gateway.nat-gw]
+  route_table_id = aws_route_table.private-RT.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_nat_gateway.nat-gw.id
+}
+
