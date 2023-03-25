@@ -1,3 +1,8 @@
+locals {
+  open-cidr = "0.0.0.0/0"
+}
+
+
 resource "aws_vpc" "vpc" {
   cidr_block                       = var.cidr-block
   enable_dns_support               = true
@@ -22,7 +27,7 @@ resource "aws_route_table" "private-RT" {
 
 resource "aws_route" "igw-route" {
   route_table_id         = aws_route_table.public-RT.id
-  destination_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = local.open-cidr
   gateway_id             = aws_internet_gateway.igw.id
 }
 
@@ -56,7 +61,7 @@ resource "aws_nat_gateway" "nat-gw" {
 resource "aws_route" "nat-route" {
   depends_on = [aws_nat_gateway.nat-gw]
   route_table_id = aws_route_table.private-RT.id
-  destination_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = local.open-cidr
   gateway_id = aws_nat_gateway.nat-gw.id
 }
 
