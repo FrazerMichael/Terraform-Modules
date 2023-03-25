@@ -46,7 +46,7 @@ resource "aws_eip" "eip-public-SN" {
 }
 
 resource "aws_nat_gateway" "nat-gw" {
-  allocation_id = aws_eip.example.id
+  allocation_id = aws_eip.eip-public-SN.id
   subnet_id     = aws_subnet.public-SN.id
   tags = {Name = "${var.cluster}-NAT-gw"}
   depends_on = [aws_internet_gateway.igw]
