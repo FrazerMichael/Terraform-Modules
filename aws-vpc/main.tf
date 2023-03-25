@@ -60,3 +60,12 @@ resource "aws_route" "nat-route" {
   gateway_id = aws_nat_gateway.nat-gw.id
 }
 
+resource "aws_route_table_association" "private-RT-SN-assoc" {
+  subnet_id      = aws_subnet.private-SN.id
+  route_table_id = aws_route_table.private-RT.id
+}
+
+resource "aws_route_table_association" "public-RT-SN-assoc" {
+  subnet_id      = aws_subnet.public-SN.id
+  route_table_id = aws_route_table.public-RT.id
+}
