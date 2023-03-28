@@ -2,6 +2,8 @@ variable "sg-id" {}
 
 variable "SN-id" {}
 
+variable "user_data" {}
+
 variable "cluster" {
   type = string
 }
