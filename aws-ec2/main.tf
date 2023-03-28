@@ -13,6 +13,6 @@ resource "aws_instance" "ec2-instance" {
   key_name        = var.key
   subnet_id       = var.SN-id
   security_groups = [var.sg-id]
-  user_data = var.user-data
+  user_data       = var.user-data
   tags            = { Name = "${var.cluster}-ec2-${var.private == true ? "private" : "public"}-${var.config-name}" }
 }

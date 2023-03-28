@@ -4,10 +4,10 @@ locals {
 
 
 resource "aws_vpc" "vpc" {
-  cidr_block                       = var.cidr-block
-  enable_dns_support               = true
-  enable_dns_hostnames             = true
-  tags                             = { Name = "${var.cluster}-vpc" }
+  cidr_block           = var.cidr-block
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+  tags                 = { Name = "${var.cluster}-vpc" }
 }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
@@ -32,12 +32,12 @@ resource "aws_route" "igw-route" {
 
 
 resource "aws_subnet" "public-SN" {
-  vpc_id            = aws_vpc.vpc.id
-  availability_zone = var.azs[0]
-  cidr_block        = var.public-cidr
+  vpc_id                                      = aws_vpc.vpc.id
+  availability_zone                           = var.azs[0]
+  cidr_block                                  = var.public-cidr
   enable_resource_name_dns_a_record_on_launch = true
-  map_public_ip_on_launch = true
-  tags              = { Name = "${var.cluster}-public-SN" }
+  map_public_ip_on_launch                     = true
+  tags                                        = { Name = "${var.cluster}-public-SN" }
 }
 
 resource "aws_subnet" "private-SN" {
@@ -54,16 +54,16 @@ resource "aws_eip" "eip-public-SN" {
 resource "aws_nat_gateway" "nat-gw" {
   allocation_id = aws_eip.eip-public-SN.id
   subnet_id     = aws_subnet.public-SN.id
-  tags = {Name = "${var.cluster}-NAT-gw"}
-  depends_on = [aws_internet_gateway.igw]
+  tags          = { Name = "${var.cluster}-NAT-gw" }
+  depends_on    = [aws_internet_gateway.igw]
 }
 
 
 resource "aws_route" "nat-route" {
-  depends_on = [aws_nat_gateway.nat-gw]
-  route_table_id = aws_route_table.private-RT.id
+  depends_on             = [aws_nat_gateway.nat-gw]
+  route_table_id         = aws_route_table.private-RT.id
   destination_cidr_block = local.open-cidr
-  gateway_id = aws_nat_gateway.nat-gw.id
+  gateway_id             = aws_nat_gateway.nat-gw.id
 }
 
 resource "aws_route_table_association" "private-RT-SN-assoc" {
