@@ -7,7 +7,6 @@ resource "aws_vpc" "vpc" {
   cidr_block                       = var.cidr-block
   enable_dns_support               = true
   enable_dns_hostnames             = true
-  assign_generated_ipv6_cidr_block = true
   tags                             = { Name = "${var.cluster}-vpc" }
 }
 resource "aws_internet_gateway" "igw" {
