@@ -36,6 +36,8 @@ resource "aws_subnet" "public-SN" {
   vpc_id            = aws_vpc.vpc.id
   availability_zone = var.azs[0]
   cidr_block        = var.public-cidr
+  enable_resource_name_dns_a_record_on_launch = true
+  map_public_ip_on_launch = true
   tags              = { Name = "${var.cluster}-public-SN" }
 }
 
