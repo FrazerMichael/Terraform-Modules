@@ -4,7 +4,7 @@ variable "user-data" {}
 
 variable "vpc-subnet-ids" {}
 
-variable "vpc_id" {}
+variable "vpc-id" {}
 
 variable "cluster" {
   type = string
