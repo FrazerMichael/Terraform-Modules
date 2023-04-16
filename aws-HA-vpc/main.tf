@@ -10,7 +10,7 @@ resource "aws_internet_gateway" "igw" {
   tags   = { Name = "${var.cluster}-igw" }
 }
 
-resource "aws_subnet" "public-SN" {
+resource "aws_subnet" "SN-1" {
   vpc_id                                      = aws_vpc.vpc.id
   availability_zone                           = var.azs[0]
   cidr_block                                  = var.cidr-blocks[0]
@@ -19,7 +19,7 @@ resource "aws_subnet" "public-SN" {
   tags                                        = { Name = "SN-${var.cluster}-1" }
 }
 
-resource "aws_subnet" "public-SN" {
+resource "aws_subnet" "SN-2" {
   vpc_id                                      = aws_vpc.vpc.id
   availability_zone                           = var.azs[1]
   cidr_block                                  = var.cidr-blocks[1]
@@ -28,7 +28,7 @@ resource "aws_subnet" "public-SN" {
   tags                                        = { Name = "SN-${var.cluster}-2" }
 }
 
-resource "aws_subnet" "public-SN" {
+resource "aws_subnet" "SN-3" {
   vpc_id                                      = aws_vpc.vpc.id
   availability_zone                           = var.azs[2]
   cidr_block                                  = var.cidr-blocks[2]

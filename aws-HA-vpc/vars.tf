@@ -1,5 +1,5 @@
 variable "azs" {
-  type    = list(string)
+  type = list(string)
 }
 
 variable "vpc-block" {
@@ -12,5 +12,5 @@ variable "cluster" {
 }
 
 variable "cidr-blocks" {
-  type    = list(string)
+  type = list(string)
 }
