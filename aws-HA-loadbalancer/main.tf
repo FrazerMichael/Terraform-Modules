@@ -1,6 +1,7 @@
 resource "aws_launch_configuration" "ec2-cluster" {
   image_id        = "ami-06e46074ae430fba6"
   instance_type   = "t2.micro"
+  name = "${var.cluster}-launch-config"
   security_groups = [var.sg-id]
   user_data       = var.user-data
 
