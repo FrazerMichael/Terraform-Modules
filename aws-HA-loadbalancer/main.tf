@@ -10,7 +10,7 @@ resource "aws_launch_configuration" "ec2-cluster" {
 }
 
 resource "aws_lb_target_group" "asg-tg" {
-  name     = "asg-tg"
+  name     = "${var.cluster}-asg-tg"
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc-id
@@ -33,6 +33,11 @@ resource "aws_autoscaling_group" "asg" {
   min_size             = 2
   max_size             = 3
   desired_capacity     = 3
+  tag {
+    key = "Name"
+    value = "${var.cluster}-asg"
+    propagate_at_launch = true
+  }
 }
 
 resource "aws_lb" "lb" {
