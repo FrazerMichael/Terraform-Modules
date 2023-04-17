@@ -1,4 +1,4 @@
-resource "aws_lauch_configuration" "ec2-cluster" {
+resource "aws_launch_configuration" "ec2-cluster" {
   image_id        = "ami-06e46074ae430fba6"
   instance_type   = "t2.micro"
   security_groups = [var.sg-id]
@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "asg-tg" {
   name     = "asg-tg"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  vpc_id   = var.vpc-id
   health_check {
     path                = "/"
     protocol            = "HTTP"
@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity     = 3
 }
 
-resource "aws" "lb" {
+resource "aws_lb" "lb" {
   name               = "${var.cluster}-lb"
   load_balancer_type = "application"
   subnets            = var.vpc-subnet-ids
@@ -43,7 +43,7 @@ resource "aws" "lb" {
 }
 
 resource "aws_lb_listener" "http" {
-  listener_arn = aws_lb.lb.arn
+  load_balancer_arn = aws_lb.lb.arn
   port         = 80
   protocol     = "HTTP"
   default_action {
