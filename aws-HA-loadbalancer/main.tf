@@ -26,7 +26,7 @@ resource "aws_lb_target_group" "asg-tg" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  launch_configuration = aws_lauch_configuration.ec2-cluster.name
+  launch_configuration = aws_launch_configuration.ec2-cluster.name
   vpc_zone_identifier  = var.vpc-subnet-ids
   target_group_arns    = [aws_lb_target_group.asg-tg.arn]
   health_check_type    = "ELB"
