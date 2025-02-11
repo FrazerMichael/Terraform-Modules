@@ -24,22 +24,21 @@ module "security-group" {
       from_port   = 22
       to_port     = 22
       protocol    = "TCP"
-      description = "SSH access for SSM"
-      cidr_blocks = "100.207.100.68/32"
+      cidr_blocks = <From parameter store>
     },
     {
-      from_port   = 22
-      to_port     = 22
+      from_port   = 80
+      to_port     = 80
       protocol    = "TCP"
       description = "SSH access for SSM"
-      cidr_blocks = "100.207.109.70/32"
+      cidr_blocks = <From parameter store>
     },
     {
-      from_port   = 22
-      to_port     = 22
+      from_port   = 443
+      to_port     = 443
       protocol    = "TCP"
       description = "SSH access for SSM"
-      cidr_blocks = "100.207.109.70/32"
+      cidr_blocks = <From parameter store>
     }
   ]
 }
